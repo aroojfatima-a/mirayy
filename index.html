@@ -10,6 +10,7 @@
             padding: 0;
             background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -26,20 +27,15 @@
             box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
             animation: fadeIn 2s ease-in-out;
         }
-        .click-me {
+        .icon-container {
+            display: flex;
+            gap: 20px;
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            background: #ff66b2;
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s;
         }
-        .click-me:hover {
-            transform: scale(1.1);
+        .icon {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
         }
         .popup {
             display: none;
@@ -58,7 +54,7 @@
         .popup img {
             width: 100px;
             height: 100px;
-            border-radius: 50%;
+            border-radius: 10px;
             margin-bottom: 10px;
         }
         .popup p {
@@ -86,17 +82,33 @@
 <body>
     <div class="room-container">
         <h1>💖 Welcome to Your Virtual Surprise! 💖</h1>
-        <button class="click-me" onclick="showPopup()">Click for a Surprise 🎀</button>
+        <div class="icon-container">
+            <img src="flower_icon.png" class="icon" onclick="showPopup('flower')" alt="Flower">
+            <img src="gift_icon.png" class="icon" onclick="showPopup('gift')" alt="Gift">
+            <img src="heart_icon.png" class="icon" onclick="showPopup('heart')" alt="Heart">
+        </div>
     </div>
     
     <div class="popup" id="popup">
-        <img src="friend_picture.jpg" alt="Friend's Picture">
-        <p>🎂✨ Happy Birthday & Eid Mubarak! 🎀💖 May your day be filled with love, joy, and endless happiness! ✨🎂</p>
+        <img id="popup-img" src="" alt="Popup Image">
+        <p id="popup-text"></p>
         <button onclick="closePopup()">Close</button>
     </div>
     
     <script>
-        function showPopup() {
+        function showPopup(type) {
+            let popupImg = document.getElementById("popup-img");
+            let popupText = document.getElementById("popup-text");
+            if (type === 'flower') {
+                popupImg.src = "flower.jpg";
+                popupText.innerText = "🌸 Beautiful flowers for a beautiful soul! Happy Birthday & Eid Mubarak!";
+            } else if (type === 'gift') {
+                popupImg.src = "gift.jpg";
+                popupText.innerText = "🎁 A special gift for an amazing friend! May your day be filled with joy!";
+            } else if (type === 'heart') {
+                popupImg.src = "heart.jpg";
+                popupText.innerText = "💖 Sending you lots of love and happiness! You are truly special!";
+            }
             document.getElementById("popup").style.display = "block";
         }
         function closePopup() {
