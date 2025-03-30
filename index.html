@@ -66,6 +66,7 @@
         .popup p {
             color: #d63384;
             font-size: 18px;
+            animation: glowText 1.5s infinite alternate;
         }
         .popup button {
             background: #ff66b2;
@@ -98,6 +99,10 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        @keyframes glowText {
+            from { text-shadow: 0 0 5px #ff66b2; }
+            to { text-shadow: 0 0 15px #ff1493; }
+        }
         @keyframes floatUp {
             0% { transform: translateY(50px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
@@ -106,6 +111,18 @@
             position: absolute;
             bottom: -100px;
             animation: floatUp 5s infinite ease-in-out;
+        }
+        .firework {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, yellow, red, transparent);
+            border-radius: 50%;
+            animation: explode 1s ease-out;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
         }
     </style>
 </head>
@@ -130,37 +147,26 @@
         function showPopup(type) {
             let popupImg = document.getElementById("popup-img");
             let popupText = document.getElementById("popup-text");
-            if (type === 'flower') {
-                popupImg.src = "flower.jpg";
-                popupText.innerText = "🌸 Beautiful flowers for a beautiful soul! Happy Birthday & Eid Mubarak!";
-            } else if (type === 'gift') {
-                popupImg.src = "gift.jpg";
-                popupText.innerText = "🎁 A special gift for an amazing friend! May your day be filled with joy!";
-            } else if (type === 'heart') {
-                popupImg.src = "heart.jpg";
-                popupText.innerText = "💖 Sending you lots of love and happiness! You are truly special!";
-            } else if (type === 'surprise') {
+            if (type === 'surprise') {
                 popupImg.src = "friend_picture.jpg";
                 popupText.innerText = "🎂✨ Happy Birthday & Eid Mubarak! 🎀💖 Wishing you endless joy, love, and success!";
-                startConfetti();
+                startFireworks();
             }
             document.getElementById("popup").style.display = "block";
         }
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
-        function startConfetti() {
-            for (let i = 0; i < 50; i++) {
-                let balloon = document.createElement("img");
-                balloon.src = "balloon.png";
-                balloon.className = "balloon";
-                balloon.style.left = Math.random() * 100 + "vw";
-                balloon.style.animationDuration = Math.random() * 3 + 2 + "s";
-                document.body.appendChild(balloon);
-                setTimeout(() => { balloon.remove(); }, 5000);
+        function startFireworks() {
+            for (let i = 0; i < 10; i++) {
+                let firework = document.createElement("div");
+                firework.className = "firework";
+                firework.style.left = Math.random() * 100 + "vw";
+                firework.style.top = Math.random() * 100 + "vh";
+                document.body.appendChild(firework);
+                setTimeout(() => { firework.remove(); }, 1000);
             }
         }
     </script>
 </body>
 </html>
-
