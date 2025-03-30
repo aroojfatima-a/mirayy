@@ -29,6 +29,7 @@
         }
         .icon-container {
             display: flex;
+            justify-content: center;
             gap: 20px;
             margin-top: 20px;
         }
@@ -73,6 +74,21 @@
         .popup button:hover {
             transform: scale(1.1);
         }
+        .surprise-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background: #ff66b2;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+        .surprise-button:hover {
+            transform: scale(1.1);
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -87,6 +103,7 @@
             <img src="gift_icon.png" class="icon" onclick="showPopup('gift')" alt="Gift">
             <img src="heart_icon.png" class="icon" onclick="showPopup('heart')" alt="Heart">
         </div>
+        <button class="surprise-button" onclick="showPopup('surprise')">Click Here for a Surprise 🎉</button>
     </div>
     
     <div class="popup" id="popup">
@@ -108,6 +125,9 @@
             } else if (type === 'heart') {
                 popupImg.src = "heart.jpg";
                 popupText.innerText = "💖 Sending you lots of love and happiness! You are truly special!";
+            } else if (type === 'surprise') {
+                popupImg.src = "friend_picture.jpg";
+                popupText.innerText = "🎂✨ Happy Birthday & Eid Mubarak! 🎀💖 Wishing you endless joy, love, and success!";
             }
             document.getElementById("popup").style.display = "block";
         }
