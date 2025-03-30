@@ -95,24 +95,17 @@
         .surprise-button:hover {
             transform: scale(1.1);
         }
-        @keyframes explode {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(5); opacity: 0; }
+        @keyframes fly {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
         }
-        .firework {
+        .butterfly {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, yellow, red, transparent);
-            border-radius: 50%;
-            animation: explode 1.5s ease-out;
-            opacity: 0.8;
-            transform: scale(1);
-        }
-        @keyframes fireworkAnimation {
-            0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            50% { transform: translateY(-50px) scale(1.2); opacity: 0.8; }
-            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+            width: 40px;
+            height: 40px;
+            background: url('butterfly.png') no-repeat center/cover;
+            animation: fly 5s linear infinite;
         }
     </style>
 </head>
@@ -140,22 +133,21 @@
             if (type === 'surprise') {
                 popupImg.src = "friend_picture.jpg";
                 popupText.innerText = "🎂✨ Happy Birthday & Eid Mubarak! 🎀💖 Wishing you endless joy, love, and success!";
-                startFireworks();
+                startButterflies();
             }
             document.getElementById("popup").style.display = "block";
         }
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
-        function startFireworks() {
-            for (let i = 0; i < 30; i++) {
-                let firework = document.createElement("div");
-                firework.className = "firework";
-                firework.style.left = Math.random() * 100 + "vw";
-                firework.style.top = Math.random() * 100 + "vh";
-                firework.style.animation = `fireworkAnimation ${Math.random() * 2 + 1}s ease-out`;
-                document.body.appendChild(firework);
-                setTimeout(() => { firework.remove(); }, 2000);
+        function startButterflies() {
+            for (let i = 0; i < 20; i++) {
+                let butterfly = document.createElement("div");
+                butterfly.className = "butterfly";
+                butterfly.style.left = Math.random() * 100 + "vw";
+                butterfly.style.animationDuration = Math.random() * 3 + 3 + "s";
+                document.body.appendChild(butterfly);
+                setTimeout(() => { butterfly.remove(); }, 5000);
             }
         }
     </script>
