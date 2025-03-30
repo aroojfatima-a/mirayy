@@ -37,6 +37,11 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .icon:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
         }
         .popup {
             display: none;
@@ -93,6 +98,15 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        @keyframes floatUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            animation: floatUp 5s infinite ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -128,12 +142,25 @@
             } else if (type === 'surprise') {
                 popupImg.src = "friend_picture.jpg";
                 popupText.innerText = "🎂✨ Happy Birthday & Eid Mubarak! 🎀💖 Wishing you endless joy, love, and success!";
+                startConfetti();
             }
             document.getElementById("popup").style.display = "block";
         }
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
+        function startConfetti() {
+            for (let i = 0; i < 50; i++) {
+                let balloon = document.createElement("img");
+                balloon.src = "balloon.png";
+                balloon.className = "balloon";
+                balloon.style.left = Math.random() * 100 + "vw";
+                balloon.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(balloon);
+                setTimeout(() => { balloon.remove(); }, 5000);
+            }
+        }
     </script>
 </body>
 </html>
+
