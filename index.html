@@ -26,13 +26,6 @@
             box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
             animation: fadeIn 2s ease-in-out;
         }
-        .message {
-            font-size: 24px;
-            margin-top: 20px;
-            opacity: 0;
-            transition: opacity 2s;
-            color: #d63384;
-        }
         .click-me {
             margin-top: 20px;
             padding: 10px 20px;
@@ -48,21 +41,41 @@
         .click-me:hover {
             transform: scale(1.1);
         }
-        .heart {
-            position: absolute;
-            top: -10px;
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
             left: 50%;
-            width: 20px;
-            height: 20px;
-            background: pink;
-            opacity: 0.7;
-            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 82%, 18% 100%, 0% 38%);
-            animation: float 5s linear infinite;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+            text-align: center;
+            width: 300px;
+            animation: fadeIn 1s ease-in-out;
         }
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); opacity: 0.7; }
-            50% { transform: translateY(-100px) scale(1.2); opacity: 1; }
-            100% { transform: translateY(-200px) scale(1); opacity: 0; }
+        .popup img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .popup p {
+            color: #d63384;
+            font-size: 18px;
+        }
+        .popup button {
+            background: #ff66b2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .popup button:hover {
+            transform: scale(1.1);
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -73,25 +86,21 @@
 <body>
     <div class="room-container">
         <h1>💖 Welcome to Your Virtual Surprise! 💖</h1>
-        <button class="click-me" onclick="showMessage()">Click for a Surprise 🎀</button>
-        <p class="message" id="message">🎂✨ Happy Birthday & Eid Mubarak! 🎀💖 May your day be filled with love, joy, and endless happiness! ✨🎂</p>
+        <button class="click-me" onclick="showPopup()">Click for a Surprise 🎀</button>
+    </div>
+    
+    <div class="popup" id="popup">
+        <img src="friend_picture.jpg" alt="Friend's Picture">
+        <p>🎂✨ Happy Birthday & Eid Mubarak! 🎀💖 May your day be filled with love, joy, and endless happiness! ✨🎂</p>
+        <button onclick="closePopup()">Close</button>
     </div>
     
     <script>
-        function showMessage() {
-            document.getElementById("message").style.opacity = 1;
-            createHearts();
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
         }
-
-        function createHearts() {
-            for (let i = 0; i < 20; i++) {
-                let heart = document.createElement("div");
-                heart.classList.add("heart");
-                document.body.appendChild(heart);
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-                setTimeout(() => heart.remove(), 5000);
-            }
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
         }
     </script>
 </body>
